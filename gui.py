@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import random
+from PIL import Image, ImageTk
 import instructionwindow
 
 class RockPaperScissors(tk.Tk):
@@ -9,15 +10,30 @@ class RockPaperScissors(tk.Tk):
     super().__init__()
 
     self.title("Game: Rock, Paper, Scissor")
-    self.geometry("600x600")
+    self.geometry("400x350")
     self.resizable(False,False)
+    self.iconbitmap("4.ico")
+
     self.choices = ["rock", "paper", "scissors"]
     self.user_points = 0
     self.computer_points = 0
     self.tie_points = 0
+
     self.text = StringVar()
     all_font = ttk.Style()
     all_font.configure(".", font=("Roboto", 12))
+
+    self.rock_image = Image.open("5.png")
+    self.rock_image_resize = self.rock_image.resize((100, 100))
+    self.tk_rock_image = ImageTk.PhotoImage(self.rock_image_resize)
+
+    self.paper_image = Image.open("6.png")
+    self.paper_image_resize = self.paper_image.resize((100, 100))
+    self.tk_paper_image = ImageTk.PhotoImage(self.paper_image_resize)
+
+    self.scissors_image = Image.open("7.png")
+    self.scissors_image_resize = self.scissors_image.resize((100, 100))
+    self.tk_scissors_image = ImageTk.PhotoImage(self.scissors_image_resize)
 
     self.createWidgets()
 
@@ -33,27 +49,32 @@ class RockPaperScissors(tk.Tk):
                                   text="Pick an option:").grid(row=2, column=1, columnspan=3, pady=5)
 
     self.rock_button = ttk.Button(self, 
-                                  text="Rock", 
-                                  cursor="hand2", 
+                                  image=self.tk_rock_image, 
+                                  cursor="hand2",
+                                  padding=5, 
                                   command=self.rock_picked).grid(row=3, column=1, padx=5)
     
     self.paper_button = ttk.Button(self, 
-                                   text="Paper", 
+                                   image=self.tk_paper_image, 
                                    cursor="hand2", 
+                                   padding=5,
                                    command=self.paper_picked).grid(row=3, column=2)
     
     self.scissor_button = ttk.Button(self, 
-                                     text="Scissors", 
-                                     cursor="hand2", 
+                                     image=self.tk_scissors_image, 
+                                     cursor="hand2",
+                                     padding=5, 
                                      command=self.scissors_picked).grid(row=3, column=3, padx=5)
 
     self.instruction_button = ttk.Button(self, 
                                          text="Instructions",
                                          cursor="hand2",
+                                         padding=5,
                                          command=self.open_instructions_window).grid(row=4, column=2, padx=5, pady=5)
 
     self.stop_button = ttk.Button(self, 
                                   text="Stop Playing", 
+                                  padding=5,
                                   command=self.quit, 
                                   cursor="hand2").grid(row=4, columnspan=1, column=3, padx=5, pady=5)
 

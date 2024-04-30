@@ -16,4 +16,5 @@ class InstructionWindow(tk.Toplevel):
 
     ttk.Button(self,
             text='Close',
+            padding=5,
             command=self.destroy).pack(pady=5)
