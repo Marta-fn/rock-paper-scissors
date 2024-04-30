@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import random
+import instructionwindow
 
 class RockPaperScissors(tk.Tk):
   def __init__(self):
@@ -15,42 +16,46 @@ class RockPaperScissors(tk.Tk):
     self.computer_points = 0
     self.tie_points = 0
     self.text = StringVar()
+    all_font = ttk.Style()
+    all_font.configure(".", font=("Roboto", 12))
 
-    self.createTabs()
+    self.createWidgets()
 
-  def createTabs(self):
-    self.tab_parent = ttk.Notebook(self)
-
-    self.game_tab = ttk.Frame(self.tab_parent)
-    self.instruction_tab = ttk.Frame(self.tab_parent)
-    self.tab_parent.add(self.game_tab, text ="Game") 
-    self.tab_parent.add(self.instruction_tab, text ="Instructions") 
-    self.tab_parent.pack(expand=1, fill="both")
-
-    self.createFirstTabWidgets()
-    self.createSecondTabWidgets()
-
-  def createFirstTabWidgets(self):
+  def createWidgets(self):
     
-    self.game_name = ttk.Label(self.game_tab, text="Rock, Paper, Scissors").grid(row=0, columnspan=3)
+    self.game_name = ttk.Label(self, 
+                               text="Rock, Paper, Scissors").grid(row=0, column=1, columnspan=3, pady=5)
 
-    self.scoreboard = ttk.Label(self.game_tab, textvariable=self.text).grid(row=1, columnspan=3)
-    self.insttruction = ttk.Label(self.game_tab, text="Pick an option:").grid(row=2, columnspan=3)
+    self.scoreboard = ttk.Label(self, 
+                                textvariable=self.text).grid(row=1, column=1, columnspan=3)
+    
+    self.insttruction = ttk.Label(self, 
+                                  text="Pick an option:").grid(row=2, column=1, columnspan=3, pady=5)
 
-    self.rock_button = ttk.Button(self.game_tab, text="Rock", cursor="hand2", command=self.rock_picked).grid(row=3, column=0, pady=5)
-    self.paper_button = ttk.Button(self.game_tab, text="Paper", cursor="hand2", command=self.paper_picked).grid(row=3, column=1, pady=5)
-    self.scissor_button = ttk.Button(self.game_tab, text="Scissors", cursor="hand2", command=self.scissors_picked).grid(row=3, column=3, pady=5)
+    self.rock_button = ttk.Button(self, 
+                                  text="Rock", 
+                                  cursor="hand2", 
+                                  command=self.rock_picked).grid(row=3, column=1, padx=5)
+    
+    self.paper_button = ttk.Button(self, 
+                                   text="Paper", 
+                                   cursor="hand2", 
+                                   command=self.paper_picked).grid(row=3, column=2)
+    
+    self.scissor_button = ttk.Button(self, 
+                                     text="Scissors", 
+                                     cursor="hand2", 
+                                     command=self.scissors_picked).grid(row=3, column=3, padx=5)
 
-    self.stop_button = ttk.Button(self.game_tab, text="Stop Playing", command=self.quit, cursor="hand2").grid(row=4, columnspan=3)
+    self.instruction_button = ttk.Button(self, 
+                                         text="Instructions",
+                                         cursor="hand2",
+                                         command=self.open_instructions_window).grid(row=4, column=2, padx=5, pady=5)
 
-  def createSecondTabWidgets(self):
-
-    self.insttructions = tk.Label(self.instruction_tab, text="""
-                                  The player and the computer will select an option.\n
-                                  Rock crushes scissors;\n
-                                  Paper wraps rock;\n
-                                  Scissors cut paper;\n 
-                                  Ties occur when the choices are the same.""", justify="center").pack()
+    self.stop_button = ttk.Button(self, 
+                                  text="Stop Playing", 
+                                  command=self.quit, 
+                                  cursor="hand2").grid(row=4, columnspan=1, column=3, padx=5, pady=5)
 
   def rock_picked(self):
     self.computer_choice = random.choice(self.choices)
@@ -87,3 +92,7 @@ class RockPaperScissors(tk.Tk):
   
   def show_scoreboard(self):
       return self.text.set(f"Score:\nYou: {self.user_points}\nComputer: {self.computer_points}\nTies: {self.tie_points}")
+  
+  def open_instructions_window(self):
+    window = instructionwindow.InstructionWindow(self)
+    window.grab_set()
