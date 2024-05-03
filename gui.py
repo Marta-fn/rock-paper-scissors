@@ -10,7 +10,11 @@ class RockPaperScissors(tk.Tk):
     super().__init__()
 
     self.title("Game: Rock, Paper, Scissor")
-    self.geometry("400x350")
+    window_width = 400
+    window_height = 350
+    screen_width = (self.winfo_screenwidth() // 2) - (window_width // 2)
+    screen_height = (self.winfo_screenheight() // 2) - (window_height // 2)
+    self.geometry(f"{window_width}x{window_height}+{screen_width}+{screen_height}")
     self.resizable(False,False)
     self.iconbitmap("4.ico")
 
