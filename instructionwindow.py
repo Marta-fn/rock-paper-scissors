@@ -1,8 +1,7 @@
-import tkinter as tk
 from tkinter import *
-from tkinter import ttk
+import customtkinter
 
-class InstructionWindow(tk.Toplevel):
+class InstructionWindow(customtkinter.CTkToplevel):
   def __init__(self, parent):
     super().__init__(parent)
 
@@ -14,11 +13,12 @@ class InstructionWindow(tk.Toplevel):
     self.geometry(f"{window_width}x{window_height}+{screen_width}+{screen_height}")
     self.resizable(False,False)
 
-    self.insttructions = ttk.Label(self, 
-                                  text="The player and the computer will select an option.\nRock crushes scissors;\nPaper wraps rock;\nScissors cut paper;\nTies occur when the choices are the same.", 
-                                  justify="center").pack(pady=10)
+    customtkinter.CTkLabel(self, 
+                           text="The player and the computer will select an option.\nRock crushes scissors;\nPaper wraps rock;\nScissors cut paper;\nTies occur when the choices are the same.", 
+                           justify="center",
+                           font=parent.all_font).pack(pady=10)
 
-    ttk.Button(self,
+    customtkinter.CTkButton(self,
             text='Close',
-            padding=5,
+            font=parent.all_font,
             command=self.destroy).pack(pady=5)

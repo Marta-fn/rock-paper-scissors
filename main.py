@@ -1,5 +1,5 @@
-import gui
+import firstwindow
 
-app = gui.RockPaperScissors()
+app = firstwindow.FirstWindow()
 
 app.mainloop()
