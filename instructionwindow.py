@@ -21,4 +21,6 @@ class InstructionWindow(customtkinter.CTkToplevel):
     customtkinter.CTkButton(self,
             text='Close',
             font=parent.all_font,
+            fg_color="#de3c4b",
+            hover_color="#932833",
             command=self.destroy).pack(pady=5)
