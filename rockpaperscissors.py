@@ -9,8 +9,8 @@ class RockPaperScissors(customtkinter.CTkToplevel):
     super().__init__(parent)
 
     self.title("Game: Rock, Paper, Scissor")
-    window_width = 450
-    window_height = 400
+    window_width = 470
+    window_height = 390
     screen_width = (self.winfo_screenwidth() // 2) - (window_width // 2)
     screen_height = (self.winfo_screenheight() // 2) - (window_height // 2)
     self.geometry(f"{window_width}x{window_height}+{screen_width}+{screen_height}")
@@ -41,18 +41,18 @@ class RockPaperScissors(customtkinter.CTkToplevel):
     
     self.game_name = customtkinter.CTkLabel(self, 
                                text="Rock, Paper, Scissors",
-                               font=self.all_font).grid(row=0, column=1, columnspan=3, pady=10)
+                               font=customtkinter.CTkFont(family="Roboto", size=20)).grid(row=0, column=1, columnspan=3, pady=15)
 
-    self.bothChoices = customtkinter.CTkLabel(self, 
+    self.both_choices = customtkinter.CTkLabel(self, 
                                 textvariable=self.choicesText,
                                 font=self.all_font).grid(row=1, column=1, columnspan=1)
     
-    self.winner = customtkinter.CTkLabel(self, 
-                                textvariable=self.winnerText,
-                                bg_color=self.change_bg_color(),
-                                width=100,
-                                height=100,
-                                font=self.all_font).grid(row=1, column=2, columnspan=1)
+    self.winner_label = customtkinter.CTkLabel(self,
+                                         textvariable=self.winnerText, 
+                                         width=100,
+                                         height=100,
+                                         font=customtkinter.CTkFont(family="Roboto", size=20))
+    self.winner_label.grid(row=1, column=2, columnspan=1)
     
     self.scoreboard = customtkinter.CTkLabel(self, 
                                 textvariable=self.text,
@@ -69,7 +69,7 @@ class RockPaperScissors(customtkinter.CTkToplevel):
                                   hover=False,
                                   cursor="hand2",
                                   font=self.all_font, 
-                                  command=self.rock_picked).grid(row=3, column=1, padx=5)
+                                  command=self.rock_picked).grid(row=3, column=1, padx=10)
     
     self.paper_button = customtkinter.CTkButton(self, 
                                    image=self.paper_image,
@@ -87,21 +87,23 @@ class RockPaperScissors(customtkinter.CTkToplevel):
                                      hover=False,  
                                      cursor="hand2",
                                      font=self.all_font,
-                                     command=self.scissors_picked).grid(row=3, column=3, padx=5)
+                                     command=self.scissors_picked).grid(row=3, column=3, padx=10)
 
     self.instruction_button = customtkinter.CTkButton(self, 
                                          text="Instructions",
                                          cursor="hand2",
                                          font=self.all_font,
-                                         command=self.open_instructions_window).grid(row=4, column=2, padx=5, pady=10)
+                                         height=45,
+                                         command=self.open_instructions_window).grid(row=4, column=2, padx=5, pady=15)
 
     self.stop_button = customtkinter.CTkButton(self, 
                                   text="Stop Playing",
                                   font=self.all_font,
                                   fg_color="#de3c4b",
-                                  hover_color="#932833", 
+                                  hover_color="#932833",
+                                  height=45, 
                                   command=self.destroy, 
-                                  cursor="hand2").grid(row=4, columnspan=1, column=3, padx=5, pady=10)
+                                  cursor="hand2").grid(row=4, columnspan=1, column=3, padx=5, pady=15)
 
   def rock_picked(self):
     self.user_choice = "Rock"
@@ -155,26 +157,29 @@ class RockPaperScissors(customtkinter.CTkToplevel):
     self.show_scoreboard()
   
   def show_scoreboard(self):
-      return self.text.set(f"Score:\nYou: {self.user_points}\nComputer: {self.computer_points}\nTies: {self.tie_points}")
+      return self.text.set(f"Score:\n\nYou: {self.user_points}\nComputer: {self.computer_points}\nTies: {self.tie_points}")
   
   def show_choices(self):
-    return self.choicesText.set(f"Computer picked:\n{(self.computer_choice).capitalize()}\n\nVS\n\n You picked:\n{self.user_choice}")
+    return self.choicesText.set(f"Computer picked:\n{(self.computer_choice).capitalize()}\n\nYou picked:\n{self.user_choice}")
   
-  def change_bg_color(self):
+  def change_text_color(self):
     if self.winner == "Computer":
-      return "#e77a85"
+      return "#de3c4b"
     elif self.winner == "You":
-      return "#bce3ab"
+      return "#7fb069"
     else:
-      return "transparent"
+      return "black"
 
   def show_winner(self):
+    self.winner_label.configure(text_color=self.change_text_color())
+
     if self.winner == "Computer":
       return self.winnerText.set("Computer\nWins!")
     elif self.winner == "You":
       return self.winnerText.set("You\nWin!")
     else:
-      return self.winnerText.set("Its a tie.")
+      return self.winnerText.set("Its a tie.") 
+
   
   def open_instructions_window(self):
     window = instructionwindow.InstructionWindow(self)
