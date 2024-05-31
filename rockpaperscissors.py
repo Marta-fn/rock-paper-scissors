@@ -10,7 +10,7 @@ class RockPaperScissors(customtkinter.CTkToplevel):
 
     self.title("Game: Rock, Paper, Scissor")
     window_width = 470
-    window_height = 390
+    window_height = 380
     screen_width = (self.winfo_screenwidth() // 2) - (window_width // 2)
     screen_height = (self.winfo_screenheight() // 2) - (window_height // 2)
     self.geometry(f"{window_width}x{window_height}+{screen_width}+{screen_height}")

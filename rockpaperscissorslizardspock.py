@@ -1,4 +1,5 @@
 from tkinter import *
+import expandedinstructionwindow
 import customtkinter
 import random
 from PIL import Image
@@ -9,12 +10,11 @@ class RockPaperScissorsLizardSpock(customtkinter.CTkToplevel):
 
     self.title("Game: Rock, Paper, Scissor, Lizard, Spock")
     window_width = 470
-    window_height = 350
+    window_height = 420
     screen_width = (self.winfo_screenwidth() // 2) - (window_width // 2)
     screen_height = (self.winfo_screenheight() // 2) - (window_height // 2)
     self.geometry(f"{window_width}x{window_height}+{screen_width}+{screen_height}")
     self.resizable(False,False)
-    self.iconbitmap("4.ico")
     self.all_font = customtkinter.CTkFont(family="Roboto", size=16)
 
     self.choices = ["rock", "paper", "scissors", "lizard", "spock"]
@@ -56,40 +56,35 @@ class RockPaperScissorsLizardSpock(customtkinter.CTkToplevel):
 
     self.rock_button = customtkinter.CTkButton(self, 
                                   text="Rock",
-                                  fg_color="white",
-                                  hover=False,
+                                  height=70,
                                   cursor="hand2",
                                   font=self.all_font, 
                                   command=self.rock_picked).grid(row=3, column=1, padx=10)
     
     self.paper_button = customtkinter.CTkButton(self,
                                    text="Paper",
-                                   fg_color="white",
-                                   hover=False,   
+                                   height=70,
                                    cursor="hand2",
                                    font=self.all_font,
                                    command=self.paper_picked).grid(row=3, column=2)
     
     self.scissor_button = customtkinter.CTkButton(self,
                                      text="Scissor",
-                                     fg_color="white",
-                                     hover=False,  
+                                     height=70,
                                      cursor="hand2",
                                      font=self.all_font,
                                      command=self.scissors_picked).grid(row=3, column=3, padx=10)
     
     self.lizard_button = customtkinter.CTkButton(self,
                                      text="Lizard",
-                                     fg_color="white",
-                                     hover=False,
+                                     height=70,
                                      cursor="hand2",
                                      font=self.all_font,
                                      command=self.lizard_picked).grid(row=4, column=1)
     
     self.spock_button = customtkinter.CTkButton(self,
                                      text="Spock",
-                                     fg_color="white",
-                                     hover=False,
+                                     height=70,
                                      cursor="hand2",
                                      font=self.all_font,
                                      command=self.spock_picked).grid(row=4, column=2, pady=5)
@@ -221,5 +216,5 @@ class RockPaperScissorsLizardSpock(customtkinter.CTkToplevel):
 
   
   def open_instructions_window(self):
-    window = instructionwindow.InstructionWindow(self)
+    window = expandedinstructionwindow.ExpandedInstructionWindow(self)
     window.grab_set()

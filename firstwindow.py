@@ -8,13 +8,13 @@ class FirstWindow(customtkinter.CTk):
     super().__init__()
 
     self.title("Let's Play?")
-    window_width = 370
-    window_height = 200
+    window_width = 440
+    window_height = 230
     screen_width = (self.winfo_screenwidth() // 2) - (window_width // 2)
     screen_height = (self.winfo_screenheight() // 2) - (window_height // 2)
     self.geometry(f"{window_width}x{window_height}+{screen_width}+{screen_height}")
     self.resizable(False,False)
-    self.iconbitmap("4.ico")
+    self.iconbitmap(default="4.ico")
     self.all_font = customtkinter.CTkFont(family="Roboto", size=16)
 
     customtkinter.CTkLabel(self, 
@@ -25,8 +25,8 @@ class FirstWindow(customtkinter.CTk):
     customtkinter.CTkButton(self,
                             text="Rock, Paper, Scissors",
                             font=self.all_font,
-                            height=50,
-                            width=50, 
+                            height=70,
+                            width=200,
                             fg_color="#7fb069",
                             hover_color="#386150",
                             cursor="hand2", 
@@ -36,8 +36,8 @@ class FirstWindow(customtkinter.CTk):
     customtkinter.CTkButton(self,
                             text="Rock, Paper, Scissors,\n Lizard, Spock",
                             font=self.all_font,
-                            height=50,
-                            width=50,
+                            height=70,
+                            width=200,
                             fg_color="#7fb069",
                             hover_color="#386150", 
                             cursor="hand2",
@@ -47,8 +47,8 @@ class FirstWindow(customtkinter.CTk):
     customtkinter.CTkButton(self,
                             text="I don't want to play",
                             font=self.all_font,
-                            height=50,
-                            width=50, 
+                            height=70,
+                            width=200, 
                             command=self.destroy,
                             fg_color="#de3c4b",
                             hover_color="#932833",
