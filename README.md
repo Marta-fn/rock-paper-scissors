@@ -39,7 +39,7 @@ This Python project allows you to play the classic Rock Paper Scissors game as w
 - Paper disproves Spock
 - Spock vaporizes Rock
 
-## 🔗 Links
+## Links
 
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://martafn-portfolio.netlify.app/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/martarfnogueira/)
